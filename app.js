@@ -2,17 +2,39 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000;
+const bodyParser = require('body-parser')
 
 app.set('view engine', 'ejs');
+app.use(bodyParser,urlencoded({entended: true}))
 app.use(express.static(__dirname + '/public'))
 
 // change my code
-
 
 app.get('/', function (req, res) {
   res.sendFile('index.html')
 })
 
+app.post('/saveMyName', (req,res)=>{
+  console.log('did we git our end point?');
+
+  console.log(req.body);
+
+  // res.redirect('/ejs')
+
+  res.render('words',
+  {theData : req.body});
+
+  // res.render('words',
+  // {theData : req.body});
+})
+
+app.get('/saveMyNameGet', (req,res)=>{
+  console.log('did we git our end point?');
+
+  console.log(req.query);
+
+  res.redirect('/ejs')
+})
 
 app.get('/ejs', function (req, res) {
   res.render('words',
