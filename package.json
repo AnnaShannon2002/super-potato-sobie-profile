@@ -9,10 +9,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "js": "^0.1.0",
+    "mongodb": "^6.12.0",
     "nodemon": "^3.1.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnnaShannon2002/super-potato-sobie-profile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AnnaShannon2002/super-potato-sobie-profile/issues"
+  },
+  "homepage": "https://github.com/AnnaShannon2002/super-potato-sobie-profile#readme",
+  "description": ""
 }
