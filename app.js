@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
 
 app.set('view engine', 'ejs');
-app.use(bodyParser,urlencoded({entended: true}))
+app.use(bodyParser.urlencoded({entended: true}))
 app.use(express.static(__dirname + '/public'))
 
 // change my code
