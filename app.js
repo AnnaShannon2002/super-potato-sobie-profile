@@ -38,15 +38,32 @@ async function run() {
     await client.close();
   }
 }
-run().catch(console.dir);
+// run().catch(console.dir);
 
+// Minicking the above function
+async function getData() {
 
-// begin all my middlewares
+  await client.connect();
+  let collection = await client.db("game-app-database").collection("game-app-games");
 
-app.get('/', function (req, res) {
-  res.sendFile('index.html')
+  let results = await collection.find({}).toArray();
+
+    console.log(results);
+    return results;
+
+}
+
+// turn function into an asynchronous endpoint
+// read is the endpoint
+app.get('/read', async function (req, res) {
+  let getDataResults = await getData();
+  console.log(getDataResults);
+  res.render('games',
+  { gameData : getDataResults} );
+
 })
 
+// begin all middlewares
 app.post('/saveMyName', (req,res)=>{
   console.log('did we hit our end point?');
 
