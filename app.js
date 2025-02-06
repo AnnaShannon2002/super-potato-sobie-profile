@@ -3,6 +3,7 @@ require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
+const { ObjectId } = require('mongodb')
 // copied from mongodb
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
@@ -63,15 +64,57 @@ app.get('/read', async function (req, res) {
 
 })
 
+app.post ('/insert'), async (req,res)=> {
+// app.get('/insert'), async (req,res)=> {
+
+  // 
+  console.log('in /insert');
+
+  // let newSong = req.query.myName; // only for POST, GET is req.param?
+  let newSong = req.body.myName;
+  console.log(newSong);
+
+  // connect to db
+  await client.connect();
+
+  // 
+  await client
+    .db("game-app-database")
+    .collection("game-app-database")
+    .insertOne({ game: "square one"});
+}
+
+// COPIED FROM MARY CODE
+// app.post('/delete/:id', async (req,res)=>{
+
+//   console.log("in delete, req.parms.id: ", req.params.id)
+
+//   client.connect; 
+//   const collection = client.db("anna-db").collection("whatever-collection");
+//   let result = await collection.findOneAndDelete( 
+
+//   {"_id": new ObjectId(req.params.id)}
+
+//   )
+  
+//   .then(result => {
+//     console.log(result); 
+//   res.redirect('/');})
+//   })
+// copied from mary code
+
 // begin all middlewares
+
+app.get('/', function (req, res) {
+  res.sendFile('index.html');
+
+})
+
 app.post('/saveMyName', (req,res)=>{
   console.log('did we hit our end point?');
 
   console.log(req.body);
-
-
   // res.redirect('/ejs')
-
   res.render('words',
   {pageTitle: req.body.myName});
 

@@ -1,4 +1,37 @@
 
 <h1> games </h1>
 
-<%=gameData[0].game_name%>
+<%=gameData[0].fname%>
+
+
+<form method="POST" action="/delete/<%=gameData[0]._id%>">
+    <%=gameData[0].game_name%>
+    <p>action="/delete/<%=gameData[0].id%"></p>
+    <input type="submit" value="delete first game">
+</form>
+
+<form method="POST" action="/update">
+    <input type="hidden" name="nameID" value="<%=gameData[0]._id%>">
+    <input name="submit" value="delete first game">
+</form>
+
+<form method="POST" action="/delete/<%=gameData[0]._id%>">
+    <input type="hidden" name="nameID" value="<%=gameData[0]._id%>">
+
+    <input name="inputUpdateName">
+
+    <%=gameData[0].game_name%>
+    <p>action="/delete/<%=gameData[0].id%"></p>
+    <input type="submit" value="delete first game">
+</form>
+
+
+
+
+<a href="/insert">insert hard code value</a>
+
+<form method ="POST" action="/insert">
+    <input name="myName">
+    <input type="submit" value="save my name!">
+
+</form>
