@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!-- Head -->
+<head>
+  <meta charset="UTF-8">
+  <title>Annas Secret Game App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<body>
+
+<main>
+
+    <form method="POST" action="insert/">
+        <input name="title">
+        <input name="post">
+        <button class="btn btn-primary" role="submit">new post</button>
+      </form>
+
+      
+    <% profileData.forEach(result=> { %>
+        <div class="col-md-8">
+        
+  
+      <form method="POST" action="update/">
+        <input name="updateTitle" value="<%= result.title %>">
+        <input name="updatePost" value="<%= result.post %>"> 
+        <input type="hidden" name="updateId" value="<%=result._id %>">
+        <button class="btn btn-primary" role="submit"><i class="bi bi-pencil"></i></button>
+      </form>
+      
+  
+  
+      <form method="POST" action="delete/">
+        <input type="hidden" name="deleteId" value="<%=result._id %>">
+        <button class="btn btn-primary" role="submit"><i class="bi bi-trash3"></i></button>
+      </form>
+  
+  
+    </div>
+      <% }); %>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-body-tertiary text-center text-lg-start fixed-bottom">
+    <!-- Copyright -->
+    <div class="text-center footer">
+      © 2024
+      <a class="text-body" href="https://getbootstrap.com/">ANS</a> | 
+      <a href="https://github.com/AnnaShannon2002?ocid=AIDcmmcwpj1e5v_SEM__k_Cj0KCQjwvb-zBhCmARIsAAfUI2v4V2-Yfw2O4SVhdJnSSdB5tK4NX8Fm9yspUjrvVkcgTWvaAweKYh8aAvKYEALw_wcB_k_" target="_blank">See my GitHub Profile</a>
+      <!-- Copyright -->
+    </div>
+  </footer>
+  
+  <!-- all my script libraries -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js'></script>
+  <script src="scripts/script.js"></script>
+  
+  </body>
+  </html>

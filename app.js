@@ -26,144 +26,67 @@ const client = new MongoClient(uri, {
   }
 });
 
-// This just says that we have connected to the database - Dr. Cumbie
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-// run().catch(console.dir);
+const mongoCollection = client.db("annaSobieProfile").collection("annaSobieBlog");
 
-// Minicking the above function
-async function getData() {
+// inserts something into database
+function initPofileData() {
 
-  await client.connect();
-  let collection = await client.db("game-app-database").collection("game-app-games");
+    mongoCollection.insertOne({
+      title: "this is blog title",
+      post: "this is the post"
+    });
+ }
 
-  let results = await collection.find({}).toArray();
+//  initPofileData();
 
-    console.log(results);
-    return results;
 
-}
+app.get('/', async function (req, res) {
 
-// turn function into an asynchronous endpoint
-// read is the endpoint
-app.get('/read', async function (req, res) {
-  let getDataResults = await getData();
-  console.log(getDataResults);
-  res.render('games',
-  { gameData : getDataResults} );
+  let results = await mongoCollection.find({}).toArray();
 
+  res.render('profile',
+    { profileData : results });
 })
 
-app.post ('/insert'), async (req,res)=> {
-// app.get('/insert'), async (req,res)=> {
+app.post('/insert', async (req,res)=> {
 
-  // 
-  console.log('in /insert');
+  let results = await mongoCollection.insertOne({ 
+    title: req.body.title,
+    post: req.body.post
+  });
 
-  // let newSong = req.query.myName; // only for POST, GET is req.param?
-  let newSong = req.body.myName;
-  console.log(newSong);
+  res.redirect('/');
 
-  // connect to db
-  await client.connect();
+}); 
 
-  // 
-  await client
-    .db("game-app-database")
-    .collection("game-app-database")
-    .insertOne({ game: "square one"});
-}
-
-// COPIED FROM MARY CODE
-// app.post('/delete/:id', async (req,res)=>{
-
-//   console.log("in delete, req.parms.id: ", req.params.id)
-
-//   client.connect; 
-//   const collection = client.db("anna-db").collection("whatever-collection");
-//   let result = await collection.findOneAndDelete( 
-
-//   {"_id": new ObjectId(req.params.id)}
-
-//   )
+app.post('/delete', async function (req, res) {
   
-//   .then(result => {
-//     console.log(result); 
-//   res.redirect('/');})
-//   })
-// copied from mary code
-
-// begin all middlewares
-
-app.get('/', function (req, res) {
-  res.sendFile('index.html');
-
+  let result = await mongoCollection.findOneAndDelete( 
+  {
+    "_id": new ObjectId(req.body.deleteId)
+  }
+).then(result => {
+  
+  res.redirect('/');
 })
 
-app.post('/saveMyName', (req,res)=>{
-  console.log('did we hit our end point?');
+}); 
 
-  console.log(req.body);
-  // res.redirect('/ejs')
-  res.render('words',
-  {pageTitle: req.body.myName});
-
-
-  // res.render('words',
-  // {theData : req.body});
-
-
+app.post('/update', async (req,res)=>{
+  let result = await mongoCollection.findOneAndUpdate( 
+  {_id: ObjectId.createFromHexString(req.body.updateId)}, { 
+    $set: 
+      {
+        title : req.body.updateTitle, 
+        post : req.body.updatePost 
+      }
+     }
+  ).then(result => {
+  console.log(result); 
+  res.redirect('/');
 })
+}); 
 
-app.get('/saveMyNameGet', (req,res)=>{
-  console.log('did we hit our end point?');
-
-  console.log('req.query: ', req.query);
-
-  // console.log('req.params: ', req.params);
-
-  let reqName = req.query.myNameGet;
-  // res.redirect('/ejs')
-
-  res.render('words',
-  {pageTitle: reqName});
-
-})
-
-app.get('/ejs', function (req, res) {
-  res.render('words',
-    {pageTitle: 'my cool ejs page'}
-  );
-})
-
-
-// Just messing around on this one.
-app.get('/nodemon', function (req, res) {
-  res.send('look ma, no kill node process then restart node then refresh browser...cool?');
-
-})
-
-// endpoint, middleware(s)
-app.get('/helloRender', function (req, res) {
-  res.send('Hello Express from Real World<br><a href="/">back to home</a>')
-})
-
-
-
-
-app.listen(
-  port, 
-  ()=> console.log(
-    `server is running on ... localhost:${port}`
-  )
+app.listen(port, ()=> 
+  console.log(`server is running on ... localhost:${port}`) 
 );
