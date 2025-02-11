@@ -13,5 +13,5 @@ li {
 }
 
 /* use # to prefix css selector for dom/html element id attribute */
-#songList {
+#gameList {
   background-color: #CE93D8;}

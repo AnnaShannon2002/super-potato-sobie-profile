@@ -31,13 +31,16 @@ const mongoCollection = client.db("annaSobieProfile").collection("annaSobieBlog"
 // inserts something into database
 function initPofileData() {
 
-    mongoCollection.insertOne({
-      title: "this is blog title",
-      post: "this is the post"
-    });
+    mongoCollection.insertOne(
+      { name:  "Anna",
+        github: "https:/gh.com",
+        url: "",
+        status: "looking for a job"
+      }
+  );
  }
 
-//  initPofileData();
+initPofileData();
 
 
 app.get('/', async function (req, res) {
