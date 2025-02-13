@@ -32,10 +32,10 @@ const mongoCollection = client.db("annaSobieProfile").collection("annaSobieBlog"
 function initPofileData() {
 
     mongoCollection.insertOne(
-      { name:  "Anna",
-        github: "https:/gh.com",
-        url: "",
-        status: "looking for a job"
+      { name:  "Anna Shannon",
+        github: "Here is my GitHub Profile: ",
+        url: "https://github.com/AnnaShannon2002",
+        status: "looking for a cool job"
       }
   );
  }
