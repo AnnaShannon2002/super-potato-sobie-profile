@@ -35,7 +35,8 @@ function initPofileData() {
       { name:  "Anna Shannon",
         github: "Here is my GitHub Profile: ",
         url: "https://github.com/AnnaShannon2002",
-        status: "looking for a cool job"
+        status: "looking for a cool job",
+        prompt: "Submit a post below!"
       }
   );
  }
