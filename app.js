@@ -8,14 +8,9 @@ const { ObjectId } = require('mongodb')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
 
-//console.log(uri);
-
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({entended: true}))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'))
-
-
-
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -26,27 +21,26 @@ const client = new MongoClient(uri, {
   }
 });
 
+// Mongo connected?
+client.connect().then(() => console.log("MongoDB Connected")).catch(err => console.log(err));
+
 const mongoCollection = client.db("annaSobieProfile").collection("annaSobieBlog");
-
-// inserts something into database
-function initPofileData() {
-
-    mongoCollection.insertOne(
-      { name:  "Anna Shannon",
-        github: "Here is my GitHub Profile: ",
-        url: "https://github.com/AnnaShannon2002",
-        status: "looking for a cool job",
-        prompt: "Submit a post below!"
-      }
-  );
- }
-
-initPofileData();
-
 
 app.get('/', async function (req, res) {
 
   let results = await mongoCollection.find({}).toArray();
+
+// inserts data into database
+//function initProfileData() {
+  if (results.length === 0) {
+    await mongoCollection.insertOne({ 
+        name:  "Anna Shannon",
+        url: "https://github.com/AnnaShannon2002",
+        status: "looking for a cool job",
+        prompt: "Submit a post below!"
+      });
+  results = await mongoCollection.find({}).toArray();
+ }
 
   res.render('profile',
     { profileData : results });
@@ -86,11 +80,19 @@ app.post('/update', async (req,res)=>{
       }
      }
   ).then(result => {
-  console.log(result); 
-  res.redirect('/');
-})
+    console.log(result); 
+    res.redirect('/');
+  })
 }); 
 
 app.listen(port, ()=> 
   console.log(`server is running on ... localhost:${port}`) 
 );
+
+/*  
+"npm i express"
+"npm i body-parser"
+"npm i ejs"
+"npm i mongodb"
+"npm i dotenv"
+*/
