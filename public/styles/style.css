@@ -15,3 +15,11 @@ li {
 /* use # to prefix css selector for dom/html element id attribute */
 #gameList {
   background-color: #CE93D8;}
+
+.bgimage {
+  background-image: url('/images/cyber.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
