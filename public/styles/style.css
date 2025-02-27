@@ -43,3 +43,13 @@ use # to prefix css selector for dom/html element id attribute
 main {
   margin-bottom: 50px;  /* Adjust this value to increase/decrease the space */
 }
+
+#particles-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  z-index: -1; /* Make sure the particles are behind the content */
+  pointer-events: none; /* So the particles don't interfere with clicks */
+}
