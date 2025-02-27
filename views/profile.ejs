@@ -18,15 +18,17 @@
         <div class="col-md-6">
           <img src="https://avatars.githubusercontent.com/u/149623553?v=4" alt="Profile Picture" class="rounded-circle mb-3" width="200" height="200">
 
-          <% if (profileData && profileData.length > 0) { %>
-            <h2><%= profileData[0].name %></h2>
-            <p class="text-muted"><%= profileData[0].status %></p>
-          <% } else { %>
-            <h2>No profile found.</h2>
-            <p class="text-muted">Please add a profile to continue.</p>
-          <% } %>
+          <div class="lora-font-white">
+            <% if (profileData && profileData.length > 0) { %>
+              <h2><%= profileData[0].name %></h2>
+              <p class="text-muted"><%= profileData[0].status %></p>
+            <% } else { %>
+              <h2>No profile found.</h2>
+              <p class="text-muted">Please add a profile to continue.</p>
+            <% } %>
+          </div>
 
-          <div class="card p-3 mt-3">
+          <div class="card p-3 mt-3 lora-font-black">
             <h4>About Me</h4>
             <p>
               Hello! I'm <%= profileData[0].name %>. 
@@ -40,7 +42,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center lora-font-white">
       <div class="col-md-6">
         <br><h4><%= profileData[0].prompt %></h4>
       </div>
@@ -73,22 +75,18 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-body-tertiary text-center text-lg-start">
-    <!-- Copyright -->
-    <div class="text-center footer">
-      © 2025
-      <a class="text-body" href="https://getbootstrap.com/">ANS</a> |
-      <!-- For funsies -->
-      <a href="https://github.com/AnnaShannon2002?ocid=AIDcmmcwpj1e5v_SEM__k_Cj0KCQjwvb-zBhCmARIsAAfUI2v4V2-Yfw2O4SVhdJnSSdB5tK4NX8Fm9yspUjrvVkcgTWvaAweKYh8aAvKYEALw_wcB_k_" target="_blank">See my GitHub Profile</a>
-      <!-- Copyright -->
-    </div>
-  </footer>
+<footer class="bg-body-tertiary text-center text-lg-start fixed-bottom white-text">
+  <div class="text-center footer">
+    © Copyright Anna Shannon 2025
+    <!--<a class="text-body" href="https://getbootstrap.com/">ANS</a>-->
+  </div>
+</footer>
   
-  <!-- all my script libraries -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js'></script>
-  <script src="scripts/script.js"></script>
+<!-- all my script libraries -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js'></script>
+<script src="scripts/script.js"></script>
   
-  </body>
-  </html>
+</body>
+</html>
